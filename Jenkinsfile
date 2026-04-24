@@ -3,22 +3,22 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat 'mvnw.cmd clean package -DskipTests'
+                sh './mvnw clean package -DskipTests'
             }
         }
         stage('Test') {
             steps {
-                bat 'mvnw.cmd test'
+                sh './mvnw test'
             }
         }
         stage('Docker Build') {
             steps {
-                bat 'docker build -t ajaysonawane06/selfheal-app .'
+                sh 'docker build -t ajaysonawane06/selfheal-app .'
             }
         }
         stage('Deploy') {
             steps {
-                bat 'kubectl apply -f deployment.yaml'
+                sh 'kubectl apply -f deployment.yaml'
             }
         }
     }
